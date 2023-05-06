@@ -1,0 +1,34 @@
+// Search Form.
+.elementor-widget-search-form {
+	// Base Theme Widget Styles.
+    &.vamtam-has-theme-widget-styles {
+
+		&.vamtam-search-form {
+			.elementor-search-form__icon {
+				.fa-search {
+					font-family: 'theme-icons' !important;
+					font-weight: normal;
+					&::before {
+						content: var(--vamtam-icon-icon-search);
+					}
+				}
+			}
+
+			input:not([type="button"]):not([type="submit"]),
+			textarea,
+			.elementor-field-textual {
+				border-color: transparent;
+			}
+
+			&.elementor-search-form--skin-minimal {
+				.elementor-search-form__icon {
+					opacity: 1;
+				}
+			}
+		}
+
+	}
+}
+
+
+

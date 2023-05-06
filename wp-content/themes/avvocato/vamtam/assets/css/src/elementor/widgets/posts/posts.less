@@ -1,0 +1,27 @@
+// Posts.
+@import '../posts-base/posts-base.less';
+
+.elementor-widget-posts {
+	// Base Theme Widget Styles.
+	&.vamtam-has-theme-widget-styles {
+		.posts-base();
+
+		.elementor-posts--skin-vamtam_classic .elementor-post__title {
+			border-top: 0px solid var(--vamtam-accent-color-1);
+		}
+
+		.elementor-post__title {
+			border-top: 1px solid var(--vamtam-accent-color-1);
+		}
+
+		@media (min-width: 768px) {
+			.elementor-posts--skin-vamtam_classic .elementor-post__title {
+				padding-top: 0px;
+			}
+
+			.elementor-post__title {
+				padding-top: 20px;
+			}
+		}
+	}
+}

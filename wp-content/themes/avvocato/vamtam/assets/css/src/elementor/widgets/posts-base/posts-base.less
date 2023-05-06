@@ -1,0 +1,115 @@
+// Posts / Archive Posts.
+
+// Theme-dependant.
+.posts-base() {
+	// Pagination Border.
+	&.elementor-show-pagination-border-yes {
+		.elementor-pagination .page-numbers {
+			border: 1px solid var(--vamtam-default-line-color);
+		}
+	}
+
+	:is(.vamtam-post__categories, .vamtam-post__tags) {
+		display: flex;
+		a {
+			color: inherit;
+			&:not(:first-of-type) {
+				padding-left: 5px;
+			}
+		}
+	}
+
+	&.elementor-posts--align- {
+		&center {
+			.elementor-post__meta-data {
+				text-align: center;
+				:is(.vamtam-post__categories, .vamtam-post__tags) {
+					justify-content: center;
+				}
+			}
+		}
+		&left {
+			.elementor-post__meta-data {
+				text-align: left;
+				:is(.vamtam-post__categories, .vamtam-post__tags) {
+					justify-content: flex-start;
+				}
+			}
+		}
+		&right {
+			.elementor-post__meta-data {
+				text-align: right;
+				:is(.vamtam-post__categories, .vamtam-post__tags) {
+					justify-content: flex-end;
+				}
+			}
+		}
+	}
+
+	.elementor-post > .elementor-post__meta-data {
+		padding: var(--vamtam-content-padding, 0);
+	}
+
+	.elementor-post {
+
+		.elementor-post__thumbnail {
+			transition-duration: 0.9s;
+		}
+
+		&:hover {
+			.elementor-post__thumbnail {
+				transition-duration: 1.2s;
+			}
+		}
+
+		.elementor-post__thumbnail__link {
+			// overflow: hidden;
+			border-radius: var(--vamtam-img-border-radius);
+			mask-image: radial-gradient(white, black);
+		}
+	}
+
+	&.vamtam-has-hr-layout {
+		.elementor-post {
+			overflow: hidden; // We need this since the change from overflow: hidden to mask-image: radial-gradient(white, black).
+		}
+	}
+
+	@media (pointer:fine) {
+		&.vamtam-has-title-underline-anim {
+			@width: var(--vamtam-title-underline-width, var(--vamtam-global-underline-width, 1px));
+			@spacing: var(--vamtam-title-underline-spacing, var(--vamtam-global-underline-spacing, 1px));
+			.elementor-post__title {
+				a {
+					display: inline; // We need this for the milti-line underline anim follow the line breaks properly.
+					@tran-time: .5s; // If changed, please update the timeout timer value in the JS handler as well.
+					padding-bottom: @spacing;
+					background-image: linear-gradient(var(--vamtam-title-underline-bg-color, var(--vamtam-global-underline-bg-color, currentColor)) 0 0);
+					background-repeat: no-repeat ;
+					transition:
+					  background-size @tran-time,
+					  background-position 0s @tran-time; // Change after the size immediately (@tran-time is used as delay here).
+
+					// This class is added from the JS hadler of the widget.
+					&.hovered, &:hover {
+						background-position: 100% 100%; // Bottom right.
+  						background-size: 100% @width;
+					}
+
+					// Doing it like this allows us to have a minimum exit transition time (set in js handler) between hover ons/offs and avoid flickers caused by fast :hover state changes.
+					&:not(:hover):not(.hovered) {
+						background-position: 0 100%; // Bottom left.
+						background-size: 0% @width;
+					}
+				}
+			}
+			&:where(.vamtam-has-hr-layout) {
+				:where(.elementor-post__title) {
+					// We add this to avoid clipping the underline of the last line (in multiline) when the hr-layout is being used.
+					margin-bottom: calc((@width + 2px) + @spacing);
+				}
+			}
+		}
+	}
+}
+
